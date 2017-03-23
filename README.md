@@ -1,6 +1,10 @@
 # Orleans.TelemetryConsumers.ElasticSearch
 
-todo - build status
+### PR
+[![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch)
+
+### master 
+[![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master)
 
 todo nuget link
 

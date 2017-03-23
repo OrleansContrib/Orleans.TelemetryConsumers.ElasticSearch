@@ -63,7 +63,7 @@ type in the prefix you used (see above) `orleans_telemetry` adding a `dash`
 if you have data in ElasticSearch then it will display a Date field, which will be `UtcDateTime`
 
 
-
+![](ES_metrics.png?raw=true)
 
 
 

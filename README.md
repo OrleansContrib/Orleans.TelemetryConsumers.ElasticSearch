@@ -18,6 +18,10 @@ Install-Package Orleans.TelemetryConsumers.ElasticSearch
 
 ## Usage
 
+* get your elasticsearch url
+* choose an index prefix
+
+
 ```cs
 var elasticSearchURL = new Uri("http://192.168.1.1:9200");
 

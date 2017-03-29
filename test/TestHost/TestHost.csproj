@@ -114,9 +114,9 @@
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ElasticSearchTelemetryConsumer\ElasticSearchTelemetryConsumer.csproj">
+    <ProjectReference Include="..\..\src\ElasticSearchTelemetryConsumer\Orleans.TelemetryConsumers.ElasticSearch.csproj">
       <Project>{8a54e4aa-5c5e-479d-9deb-c56a8fbb4e25}</Project>
-      <Name>ElasticSearchTelemetryConsumer</Name>
+      <Name>Orleans.TelemetryConsumers.ElasticSearch</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

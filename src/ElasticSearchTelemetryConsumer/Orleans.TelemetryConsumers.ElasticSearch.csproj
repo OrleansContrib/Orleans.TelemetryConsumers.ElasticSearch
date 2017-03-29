@@ -7,8 +7,8 @@
     <ProjectGuid>{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SBTech.Orleans.ElasticUtils</RootNamespace>
-    <AssemblyName>OrleansElasticUtils</AssemblyName>
+    <RootNamespace>Orleans.TelemetryConsumers.ElasticSearch</RootNamespace>
+    <AssemblyName>Orleans.TelemetryConsumers.ElasticSearch</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

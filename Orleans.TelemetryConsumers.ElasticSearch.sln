@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchTelemetryConsumer", "src\ElasticSearchTelemetryConsumer\ElasticSearchTelemetryConsumer.csproj", "{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.TelemetryConsumers.ElasticSearch", "src\ElasticSearchTelemetryConsumer\Orleans.TelemetryConsumers.ElasticSearch.csproj", "{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHost", "test\TestHost\TestHost.csproj", "{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}"
 EndProject

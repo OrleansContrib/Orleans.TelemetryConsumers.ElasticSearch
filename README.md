@@ -6,9 +6,9 @@
 ### master 
 [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master)
 
-todo nuget link - see https://github.com/OrleansContrib/Orleans.TelemetryConsumers.ElasticSearch/releases/tag/1.4.7-pre
+todo nuget link - see https://github.com/OrleansContrib/Orleans.TelemetryConsumers.ElasticSearch/releases
 
-A collection of telemtry consumers delivering data to ElasticSearch.  Each data point is written with a elastic type matching the Telemetry type (Log, Trace, Request, Metric).  The index for the data point is calculated with a \<prefix\>-YYYY-MM-DD-HH.  This makes it easy to delete older indexes (e.g. keeping only 3 days, or 3 hours, etc)
+A collection of telemtry consumers delivering data to ElasticSearch.  Each data point is written with a elastic type matching the Telemetry type (Log, Trace, Request, Metric).  The index for the data point is calculated with a \<prefix\>-yyyy-MM-dd-HH.  This makes it easy to delete older indexes (e.g. keeping only 3 days, or 3 hours, etc)
 
 ## Installation
 

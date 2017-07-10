@@ -1,0 +1,21 @@
+﻿version: '2.1'
+
+services:
+  kibana:
+    image: sixeyed/kibana:nanoserver
+    ports: 
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    hostname: kibana
+  elasticsearch:
+    image: sixeyed/elasticsearch:nanoserver
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    mem_limit: 8192m
+    hostname: elasticsearch
+networks:
+  default:
+    external:
+      name: nat

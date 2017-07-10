@@ -122,7 +122,7 @@ namespace Orleans.Telemetry
                                                                                 .Type(ElasticMetricType()));
 
                 if (!response.IsValid && _logger != null && _logger.IsVerbose)
-                    _logger.Verbose(response.ServerError.Status, response.ServerError.Error);
+                    _logger.Verbose($"status: {response.ServerError.Status}, error: {response.ServerError.Error}");
             }
             catch (Exception ex)
             {
@@ -159,7 +159,7 @@ namespace Orleans.Telemetry
                     var response = await esClient.BulkAsync(bulkDesc);
 
                     if (response.Errors && _logger != null && _logger.IsVerbose)
-                        _logger.Error(response.ServerError.Status, response.ServerError.Error);
+                        _logger.Error(0, $"status: {response.ServerError.Status}, error: {response.ServerError.Error}");
                 }
             }
             catch (Exception ex)

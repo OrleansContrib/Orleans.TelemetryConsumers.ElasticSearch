@@ -28,13 +28,17 @@ namespace TestHost
             var clusterConfig = ClusterConfiguration.LocalhostPrimarySilo();
 
 
-            ///
-            /// see https://elk-docker.readthedocs.io/
-            /// for an easy way to run a ELK stack via docker
+			///
+			/// see https://elk-docker.readthedocs.io/
+			/// for an easy way to run a ELK stack via docker
+			/// 
+			/// or on windows this docker-compose.yml file
+			/// https://gist.github.com/jeoffman/91082bfe7d30ae2f74c07fac7db5e53b
+			/// and run docker-compose.exe in the same dir
 
-            var elasticSearchURL = new Uri("http://192.168.1.1:9200");
+			var elasticSearchURL = new Uri("http://elasticsearch:9200");
 
-            var esTeleM = new ElasticSearchTelemetryConsumer(elasticSearchURL, "orleans_telemetry");
+            var esTeleM = new ElasticSearchTelemetryConsumer(elasticSearchURL, "orleans-telemetry");
             LogManager.TelemetryConsumers.Add(esTeleM);
             LogManager.LogConsumers.Add(esTeleM);
 

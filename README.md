@@ -21,9 +21,9 @@ Install-Package Orleans.TelemetryConsumers.ElasticSearch
 
 
 ```cs
-var elasticSearchURL = new Uri("http://192.168.1.1:9200");
+var elasticSearchURL = new Uri("http://elasticsearch:9200");
 
-var esTeleM = new ElasticSearchTelemetryConsumer(elasticSearchURL, "orleans_telemetry");
+var esTeleM = new ElasticSearchTelemetryConsumer(elasticSearchURL, "orleans-telemetry");
 LogManager.TelemetryConsumers.Add(esTeleM);
 LogManager.LogConsumers.Add(esTeleM);
 
@@ -44,6 +44,35 @@ see https://elk-docker.readthedocs.io/
 ```bash
 $ sudo docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk
 ```
+or a windows based E/K
+
+docker-compose.yml
+
+```
+version: '2.1'
+
+services:
+  kibana:
+    image: sixeyed/kibana:nanoserver
+    ports: 
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    hostname: kibana
+  elasticsearch:
+    image: sixeyed/elasticsearch:nanoserver
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    mem_limit: 8192m
+    hostname: elasticsearch
+networks:
+  default:
+    external:
+      name: nat
+```
+
+and docker-compose up (thanks sixeyed)
 
 ### start your silo(s)
 
@@ -51,16 +80,16 @@ see https://gitter.im/dotnet/orleans or create an issue here for problems
 
 ### Configure ElasticSearch and Kibana
 
-Note that `orleans_telemetry` was used for the index prefix
+Note that `orleans-telemetry` was used for the index prefix
 
 go the kibana managment page
-http://192.168.1.1:5601/app/kibana#/management
+http://kibana:5601/app/kibana#/management
 
 click index patterns
-http://192.168.1.1:5601/app/kibana#/management/kibana/indices
+http://kibana:5601/app/kibana#/management/kibana/indices
 
 click +Add New
-type in the prefix you used (see above) `orleans_telemetry` adding a `dash`
+type in the prefix you used (see above) `orleans-telemetry` adding a `dash`
 
 if you have data in ElasticSearch then it will display a Date field, which will be `UtcDateTime`
 

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.TelemetryConsumers.ElasticSearch", "src\ElasticSearchTelemetryConsumer\Orleans.TelemetryConsumers.ElasticSearch.csproj", "{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHost", "test\TestHost\TestHost.csproj", "{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESTester", "ESTester\ESTester.csproj", "{5337C6AB-D1F7-48DC-A155-D6A703CAB128}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,8 +28,17 @@ Global
 		{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}.Release with Analysis|Any CPU.Build.0 = Release|Any CPU
 		{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Release with Analysis|Any CPU.ActiveCfg = Release|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Release with Analysis|Any CPU.Build.0 = Release|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5337C6AB-D1F7-48DC-A155-D6A703CAB128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BD13F56-982F-41BC-A282-82997EE4FF6F}
 	EndGlobalSection
 EndGlobal

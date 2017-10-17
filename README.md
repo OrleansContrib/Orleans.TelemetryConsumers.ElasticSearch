@@ -1,12 +1,14 @@
 # Orleans.TelemetryConsumers.ElasticSearch
 
-### PR
-[![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch)
+| --- | --- |
+| **PR Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5?svg=true) ](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch) |
+| **Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true) ](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master) |
+| **NuGet** | [![nuget](https://img.shields.io/nuget/v/Orleans.TelemetryConsumers.ElasticSearch.svg)](https://www.nuget.org/packages/Orleans.TelemetryConsumers.ElasticSearch/) |
+   
+[![Build history](https://buildstats.info/appveyor/chart/OrleansContrib/resourcefitness)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/history)
 
-### master 
-[![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master)
 
-A collection of telemtry consumers delivering data to ElasticSearch.  Each data point is written with a elastic type matching the Telemetry type (Log, Trace, Request, Metric).  The index for the data point is calculated with a \<prefix\>-yyyy-MM-dd-HH.  This makes it easy to delete older indexes (e.g. keeping only 3 days, or 3 hours, etc)
+A telemetry consumer delivering data to ElasticSearch.  Each data point is written with a elastic type matching the Telemetry type (Log, Trace, Request, Metric).  The index for the data point is calculated with a \<prefix\>-yyyy-MM-dd-HH.  This makes it easy to delete older indexes (e.g. keeping only 3 days, or 3 hours, etc)
 
 ## Installation
 

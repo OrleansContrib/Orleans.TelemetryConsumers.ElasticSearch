@@ -1,8 +1,10 @@
 # Orleans.TelemetryConsumers.ElasticSearch
 
+
+| . | . |
 | --- | --- |
-| **PR Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5?svg=true) ](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch) |
-| **Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true) ](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master) |
+| **PR Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch) |
+| **Build** | [![Build status](https://ci.appveyor.com/api/projects/status/vtv4y6n8hmdbsrl5/branch/master?svg=true)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/branch/master) |
 | **NuGet** | [![nuget](https://img.shields.io/nuget/v/Orleans.TelemetryConsumers.ElasticSearch.svg)](https://www.nuget.org/packages/Orleans.TelemetryConsumers.ElasticSearch/) |
    
 [![Build history](https://buildstats.info/appveyor/chart/OrleansContrib/resourcefitness)](https://ci.appveyor.com/project/OrleansContrib/orleans-telemetryconsumers-elasticsearch/history)

@@ -64,7 +64,7 @@ namespace Orleans.Telemetry
 				var singleNode = new SingleNodeConnectionPool(esurl);
 
 				var cc = new ConnectionConfiguration(singleNode,
-						connectionSettings => new ElasticsearchJsonNetSerializer(OrleansJsonSerializer.GetDefaultSerializerSettings().Converters))
+						connectionSettings => new ElasticsearchJsonNetSerializer())
 					.EnableHttpPipelining()
 					.ThrowExceptions();
 

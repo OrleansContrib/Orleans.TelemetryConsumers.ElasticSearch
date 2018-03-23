@@ -36,7 +36,7 @@ namespace TestHost
 			/// https://gist.github.com/jeoffman/91082bfe7d30ae2f74c07fac7db5e53b
 			/// and run docker-compose.exe in the same dir
 
-			var elasticSearchURL = new Uri("http://elasticsearch:9200");
+			var elasticSearchURL = new Uri("http://localhost:9200");
 
             var esTeleM = new ElasticSearchTelemetryConsumer(elasticSearchURL, "orleans-telemetry");
             LogManager.TelemetryConsumers.Add(esTeleM);

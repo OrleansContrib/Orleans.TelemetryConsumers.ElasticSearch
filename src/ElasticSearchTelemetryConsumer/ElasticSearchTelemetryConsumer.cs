@@ -34,6 +34,7 @@ namespace Orleans.Telemetry
 		IRequestTelemetryConsumer,
 		IFlushableLogConsumer
 	{
+        private const string DocumentType = "doc";
 		private readonly Uri _elasticSearchUri;
 		private readonly string _indexPrefix;
 
@@ -42,7 +43,7 @@ namespace Orleans.Telemetry
 		private readonly string _dateFormatter;
 		private readonly object _machineName;
 
-		public ElasticSearchTelemetryConsumer(Uri elasticSearchUri, string indexPrefix, string dateFormatter = "yyyy-MM-dd-HH", int bufferWaitSeconds = 1, int bufferSize = 50)
+        public ElasticSearchTelemetryConsumer(Uri elasticSearchUri, string indexPrefix, string dateFormatter = "yyyy-MM-dd-HH", int bufferWaitSeconds = 1, int bufferSize = 50)
 		{
 			_elasticSearchUri = elasticSearchUri;
 			_indexPrefix = indexPrefix;
@@ -76,27 +77,34 @@ namespace Orleans.Telemetry
 			}
 		}
 
-		private void SetupObserverBatchy(TimeSpan waitTime, int bufferSize)
-		{
-			this._queueToBePosted.GetConsumingEnumerable()
-				.ToObservable(Scheduler.Default)
-				.Buffer(waitTime, bufferSize)
-				.Subscribe(async (x) => await this.ElasticSearchBulkWriter(x));
-		}
+        private void SetupObserverBatchy(TimeSpan waitTime, int bufferSize)
+        {
+            this._queueToBePosted.GetConsumingEnumerable()
+                .ToObservable(Scheduler.Default)
+                .Buffer(waitTime, bufferSize)
+                .Subscribe(async (x) => await this.ElasticSearchBulkWriter(x));
+        }
 
 
-		private string ElasticIndex() => _indexPrefix + "-" + DateTime.UtcNow.ToString(_dateFormatter);  //DateTime.UtcNow.ToString("yyyy-MM-dd-HH");
-		private string ElasticMetricTelemetryType() => "metric";
-		//private string ElastiTraceTelemetryType() => "trace";
-		private string ElasticEventTelemetryType() => "event";
-		private string ElasticExceptionTelemetryType() => "exception";
-		private string ElasticDependencyTelemetryType() => "dependency";
-		private string ElasticRequestTelemetryType() => "request";
-		private string ElasticLogType() => "log";
+        //private string ElasticIndex() => _indexPrefix + "-" + DateTime.UtcNow.ToString(_dateFormatter);
+        //private string ElastiTraceTelemetryType() => "trace"; //obsoleted
 
-		#region IFlushableLogConsumer
+        //private string ElasticMetricTelemetryType() => "metric";
+        private string ElasticMetricTelemetryIndex() => _indexPrefix + "-metric-" + DateTime.UtcNow.ToString(_dateFormatter);
+	    //private string ElasticEventTelemetryType() => "event";
+	    private string ElasticEventTelemetryIndex() => _indexPrefix + "-event-" + DateTime.UtcNow.ToString(_dateFormatter);
+        //private string ElasticExceptionTelemetryType() => "exception";
+	    private string ElasticExceptionTelemetryIndex() => _indexPrefix + "-exception-" + DateTime.UtcNow.ToString(_dateFormatter);
+        //private string ElasticDependencyTelemetryType() => "dependency";
+	    private string ElasticDependencyTelemetryIndex() => _indexPrefix + "-dependency-" + DateTime.UtcNow.ToString(_dateFormatter);
+        //private string ElasticRequestTelemetryType() => "request";
+	    private string ElasticRequestTelemetryIndex() => _indexPrefix + "-request-" + DateTime.UtcNow.ToString(_dateFormatter);
+        //private string ElasticLogType() => "log";
+        private string ElasticLogIndex() => _indexPrefix + "-log-" + DateTime.UtcNow.ToString(_dateFormatter);
 
-		public void Log(Severity severity, LoggerType loggerType, string caller, string message, IPEndPoint myIPEndPoint,
+        #region IFlushableLogConsumer
+
+        public void Log(Severity severity, LoggerType loggerType, string caller, string message, IPEndPoint myIPEndPoint,
 			Exception exception, int eventCode = 0)
 		{
 			Task.Run(async () =>
@@ -110,7 +118,7 @@ namespace Orleans.Telemetry
 				tm.Add("Exception", exception?.ToString());
 				tm.Add("EventCode", eventCode);
 
-				await FinalESWrite(tm, ElasticLogType);
+				await FinalESWrite(tm, ElasticLogIndex);
 			});
 
 		}
@@ -141,7 +149,7 @@ namespace Orleans.Telemetry
 					}
 				}
 
-				await FinalESWrite(tm, ElasticExceptionTelemetryType);
+				await FinalESWrite(tm, ElasticExceptionTelemetryIndex);
 			});
 		}
 
@@ -242,7 +250,7 @@ namespace Orleans.Telemetry
 						tm.Add(prop.Key, prop.Value);
 					}
 				}
-				await FinalESWrite(tm, ElasticMetricTelemetryType);
+				await FinalESWrite(tm, ElasticMetricTelemetryIndex);
 			});
 		}
 
@@ -263,7 +271,7 @@ namespace Orleans.Telemetry
 				tm.Add("Duration", duration);
 				tm.Add("Success", success);
 
-				await FinalESWrite(tm, ElasticDependencyTelemetryType);
+				await FinalESWrite(tm, ElasticDependencyTelemetryIndex);
 			});
 		}
 
@@ -283,7 +291,7 @@ namespace Orleans.Telemetry
 				tm.Add("ResponseCode", responseCode);
 				tm.Add("Success", success);
 
-				await FinalESWrite(tm, ElasticRequestTelemetryType);
+				await FinalESWrite(tm, ElasticRequestTelemetryIndex);
 			});
 		}
 
@@ -312,7 +320,7 @@ namespace Orleans.Telemetry
 					}
 				}
 
-				await FinalESWrite(tm, ElasticEventTelemetryType);
+				await FinalESWrite(tm, ElasticEventTelemetryIndex);
 			});
 		}
 
@@ -321,7 +329,7 @@ namespace Orleans.Telemetry
 
 		#region FinalWrite
 
-		private async Task FinalESWrite(IDictionary<string, Object> tm, Func<string> type)
+		private async Task FinalESWrite(IDictionary<string, Object> tm, Func<string> index)
 		{
 			tm.Add("UtcDateTime", DateTimeOffset.UtcNow.UtcDateTime);
 			tm.Add("MachineName", _machineName);
@@ -334,8 +342,8 @@ namespace Orleans.Telemetry
 				_queueToBePosted.Add(new TelemetryRecord()
 				{
 					tm = jo,
-					IndexName = ElasticIndex(),
-					IndexType = type()
+					IndexName = index(),
+					IndexType = DocumentType
 				});
 			}
 			catch (Exception e)
@@ -358,8 +366,9 @@ namespace Orleans.Telemetry
 			try
 			{
 				var ret = await GetClient(this._elasticSearchUri)
-					.BulkPutAsync<VoidResponse>(this.ElasticIndex(), this.ElasticMetricTelemetryType(),
-						bbo.ToArray(), br => br.Refresh(false));
+					.BulkPutAsync<VoidResponse>(
+				        bbo.ToArray(), 
+				        br => br.Refresh(false));
 			}
 			catch (Exception ex)
 			{

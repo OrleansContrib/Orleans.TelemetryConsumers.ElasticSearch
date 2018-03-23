@@ -357,7 +357,7 @@ namespace Orleans.Telemetry
 
 			try
 			{
-				await GetClient(this._elasticSearchUri)
+				var ret = await GetClient(this._elasticSearchUri)
 					.BulkPutAsync<VoidResponse>(this.ElasticIndex(), this.ElasticMetricTelemetryType(),
 						bbo.ToArray(), br => br.Refresh(false));
 			}

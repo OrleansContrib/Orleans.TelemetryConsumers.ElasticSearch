@@ -14,7 +14,7 @@ namespace ESTester
 {
     public abstract class ClusterFixtureBase : IDisposable
     {
-        private readonly Elasticsearch _elasticsearch;
+        private readonly ElasticsearchInside.Elasticsearch _elasticsearch;
 
         static ClusterFixtureBase()
         {
@@ -30,7 +30,7 @@ namespace ESTester
             var testCluster = CreateTestCluster();
 
 
-            this._elasticsearch = new Elasticsearch();
+            this._elasticsearch = new ElasticsearchInside.Elasticsearch();
 
 
 

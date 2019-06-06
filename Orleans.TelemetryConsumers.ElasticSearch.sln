@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.TelemetryConsumers.ElasticSearch", "src\ElasticSearchTelemetryConsumer\Orleans.TelemetryConsumers.ElasticSearch.csproj", "{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}"
 EndProject
@@ -18,8 +18,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release with Analysis|Any CPU.ActiveCfg = Release with Analysis|Any CPU
-		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release with Analysis|Any CPU.Build.0 = Release with Analysis|Any CPU
+		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release with Analysis|Any CPU.ActiveCfg = Release|Any CPU
+		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release with Analysis|Any CPU.Build.0 = Release|Any CPU
 		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A54E4AA-5C5E-479D-9DEB-C56A8FBB4E25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{198CABB3-0ABF-47CB-8D7A-2D7D7AE69A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

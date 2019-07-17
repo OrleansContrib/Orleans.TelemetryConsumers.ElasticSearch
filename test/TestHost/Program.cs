@@ -4,6 +4,8 @@ using System;
 using Orleans;
 using Orleans.Hosting;
 using System.Threading.Tasks;
+using Orleans.TelemetryConsumers.ElasticSearch;
+using Orleans.TelemetryConsumers;
 
 namespace TestHost
 {
@@ -13,15 +15,23 @@ namespace TestHost
         {
             Console.Title = nameof(TestHost);
 
+
             return new HostBuilder()
                 .UseOrleans(builder =>
                 {
                     builder
                         .UseLocalhostClustering();
-                        //.ConfigureApplicationParts(manager =>
-                        //{
-                        //    manager.AddApplicationPart(typeof(GameGrain).Assembly).WithReferences();
-                        //});
+                    //.ConfigureApplicationParts(manager =>
+                    //{
+                    //    manager.AddApplicationPart(typeof(GameGrain).Assembly).WithReferences();
+                    //});
+
+
+                    builder.AddElasticsearchTelemetryConsumer(new Uri("http://172.28.217.188:9200/"));
+
+                    builder.UseDashboard(options => { });
+
+
                 })
                 .ConfigureLogging(builder =>
                 {

@@ -13,9 +13,11 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Orleans.Serialization;
 using Orleans.TelemetryConsumers.ElasticSearch.Serializer;
+using Microsoft.Extensions.Options;
+using Orleans.TelemetryConsumers.ElasticSearch;
 
 namespace Orleans.Telemetry
-{
+{ 
 	class TelemetryRecord
 	{
 		public JObject tm { get; set; }
@@ -25,14 +27,13 @@ namespace Orleans.Telemetry
 
 
 
-	public class ElasticSearchTelemetryConsumer :
+	public class ElasticsearchTelemetryConsumer :
 		IMetricTelemetryConsumer,
 		//ITraceTelemetryConsumer, // we dont need to handle trace, its seen via System.Diagnostics.Trace, which likely will be obsoleted by orleans
 		IEventTelemetryConsumer,
 		IExceptionTelemetryConsumer,
 		IDependencyTelemetryConsumer,
-		IRequestTelemetryConsumer,
-		IFlushableLogConsumer
+		IRequestTelemetryConsumer
 	{
         private const string DocumentType = "doc";
 		private readonly Uri _elasticSearchUri;
@@ -43,15 +44,15 @@ namespace Orleans.Telemetry
 		private readonly string _dateFormatter;
 		private readonly object _machineName;
 
-        public ElasticSearchTelemetryConsumer(Uri elasticSearchUri, string indexPrefix, string dateFormatter = "yyyy-MM-dd-HH", int bufferWaitSeconds = 1, int bufferSize = 50)
+        public ElasticsearchTelemetryConsumer(IOptions<ElasticsearchTelemetryConsumerOptions> options)
 		{
-			_elasticSearchUri = elasticSearchUri;
-			_indexPrefix = indexPrefix;
-			_dateFormatter = dateFormatter;
+            _elasticSearchUri = options.Value.ElasticSearchUri;
+			_indexPrefix = options.Value.IndexPrefix;
+			_dateFormatter = options.Value.DateFormatter;
 
 			_machineName = Environment.MachineName;
 
-			SetupObserverBatchy(TimeSpan.FromSeconds(bufferWaitSeconds), bufferSize);
+			SetupObserverBatchy(TimeSpan.FromSeconds(options.Value.BufferWaitSeconds), options.Value.BufferSize);
 		}
 
 		public IElasticLowLevelClient GetClient(Uri esurl)
@@ -102,28 +103,28 @@ namespace Orleans.Telemetry
         //private string ElasticLogType() => "log";
         private string ElasticLogIndex() => _indexPrefix + "-log-" + DateTime.UtcNow.ToString(_dateFormatter);
 
-        #region IFlushableLogConsumer
+  //      #region IFlushableLogConsumer
 
-        public void Log(Severity severity, LoggerType loggerType, string caller, string message, IPEndPoint myIPEndPoint,
-			Exception exception, int eventCode = 0)
-		{
-			Task.Run(async () =>
-			{
-				var tm = new ExpandoObject() as IDictionary<string, Object>;
-				tm.Add("Severity", severity.ToString());
-				tm.Add("LoggerType", loggerType.ToString());
-				tm.Add("Caller", caller);
-				tm.Add("Message", message);
-				tm.Add("IPEndPoint", myIPEndPoint?.ToString());
-				tm.Add("Exception", exception?.ToString());
-				tm.Add("EventCode", eventCode);
+  //      public void Log(Severity severity, LoggerType loggerType, string caller, string message, IPEndPoint myIPEndPoint,
+		//	Exception exception, int eventCode = 0)
+		//{
+		//	Task.Run(async () =>
+		//	{
+		//		var tm = new ExpandoObject() as IDictionary<string, Object>;
+		//		tm.Add("Severity", severity.ToString());
+		//		tm.Add("LoggerType", loggerType.ToString());
+		//		tm.Add("Caller", caller);
+		//		tm.Add("Message", message);
+		//		tm.Add("IPEndPoint", myIPEndPoint?.ToString());
+		//		tm.Add("Exception", exception?.ToString());
+		//		tm.Add("EventCode", eventCode);
 
-				await FinalESWrite(tm, ElasticLogIndex);
-			});
+		//		await FinalESWrite(tm, ElasticLogIndex);
+		//	});
 
-		}
+		//}
 
-		#endregion
+		//#endregion
 
 		#region IExceptionTelemetryConsumer
 		public void TrackException(Exception exception, IDictionary<string, string> properties = null,
@@ -197,7 +198,7 @@ namespace Orleans.Telemetry
 		//        }
 		//    }
 
-		//    await FinalESWrite(tm, ElastiTraceTelemetryType);
+		//    await FinalESWrite(tm, ElasticTraceTelemetryType);
 		//}
 
 

@@ -9,14 +9,15 @@
     <Company>OrleansContrib</Company>
     <Product>ElasticSearchTelemetryConsumer</Product>
     <Description>Orleans Telemetry Sink to Elasticsearch</Description>
-    <Copyright>Copyright 2017</Copyright>
+    <Copyright>Copyright 2019</Copyright>
     <Version>1.4.0.0</Version>
     <AssemblyVersion>1.4.0.0</AssemblyVersion>
     <FileVersion>1.4.0.0</FileVersion>
     <Authors>OrleansContrib</Authors>
-    <PackageLicenseUrl>http://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/OrleansContrib/Orleans.TelemetryConsumers.ElasticSearch</PackageProjectUrl>
     <PackageTags>Orleans, Elasticsearch, telemetry, metrics</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release with Analysis|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>

@@ -65,8 +65,7 @@ namespace Orleans.Telemetry
 			{
 				var singleNode = new SingleNodeConnectionPool(esurl);
 
-				var cc = new ConnectionConfiguration(singleNode,
-						connectionSettings => new ElasticsearchJsonNetSerializer())
+				var cc = new ConnectionConfiguration(singleNode, new ElasticsearchJsonNetSerializer())
 					.EnableHttpPipelining()
 					.ThrowExceptions();
 
@@ -368,8 +367,8 @@ namespace Orleans.Telemetry
 			{
 				var ret = await GetClient(this._elasticSearchUri)
 					.BulkPutAsync<VoidResponse>(
-				        bbo.ToArray(), 
-				        br => br.Refresh(false));
+						PostData.MultiJson(bbo.ToArray()),
+						new BulkRequestParameters { Refresh = Refresh.False });
 			}
 			catch (Exception ex)
 			{

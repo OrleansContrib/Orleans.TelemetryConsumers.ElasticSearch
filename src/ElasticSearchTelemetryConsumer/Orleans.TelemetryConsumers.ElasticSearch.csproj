@@ -17,7 +17,7 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/OrleansContrib/Orleans.TelemetryConsumers.ElasticSearch</PackageProjectUrl>
     <PackageTags>Orleans, Elasticsearch, telemetry, metrics</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release with Analysis|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>

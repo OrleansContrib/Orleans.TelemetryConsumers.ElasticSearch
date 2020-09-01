@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,4 +22,12 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal --configuration Release
+    - name: Create the package
+      run: dotnet pack --configuration Release -p:Version="6.8.1"
+    - name: upload nupkg artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: nugets
+        path: src/**/*.nupkg
+
